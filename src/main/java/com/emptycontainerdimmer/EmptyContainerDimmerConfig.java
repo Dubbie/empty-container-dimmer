@@ -1,12 +1,12 @@
-package com.itemclarity;
+package com.emptycontainerdimmer;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.Range;
 
-@ConfigGroup("itemclarity")
-public interface ItemClarityConfig extends Config {
+@ConfigGroup("empty-container-dimmer")
+public interface EmptyContainerDimmerConfig extends Config {
     @ConfigItem(
             keyName = "dimEmptyContainers",
             name = "Dim empty containers",
@@ -26,15 +26,5 @@ public interface ItemClarityConfig extends Config {
     )
     default int dimStrength() {
         return 50;
-    }
-
-    @ConfigItem(
-            keyName = "showTierMarkers",
-            name = "Show tier markers",
-            description = "Shows small squares based on compost levels",
-            position = 2
-    )
-    default boolean showTierMarkers() {
-        return true;
     }
 }

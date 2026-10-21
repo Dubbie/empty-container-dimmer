@@ -14,7 +14,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.itemclarity.ItemClarityPluginTest'
+def pluginMainClass = 'com.emptycontainerdimmer.EmptyContainerDimmerPluginTest'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -27,7 +27,7 @@ dependencies {
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'com.itemclarity'
+group = 'com.emptycontainerdimmer'
 
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = 'UTF-8'
@@ -74,5 +74,5 @@ tasks.register('shadowJar', Jar) {
 
 tasks.named('test', Test) {
     // This class launches the development client; it isn't a unit test.
-    exclude 'com/itemclarity/ItemClarityPluginTest.class'
+    exclude 'com/emptycontainerdimmer/EmptyContainerDimmerPluginTest.class'
 }

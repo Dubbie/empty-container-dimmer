@@ -1,4 +1,4 @@
-package com.itemclarity;
+package com.emptycontainerdimmer;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.widgets.WidgetItem;
@@ -14,16 +14,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class ItemClarityOverlay extends WidgetItemOverlay {
+public class EmptyContainerDimmerOverlay extends WidgetItemOverlay {
 
     private final ItemManager itemManager;
 
-    private final ItemClarityConfig config;
+    private final EmptyContainerDimmerConfig config;
 
     private final Map<Integer, BufferedImage> dimMasks = new HashMap<>();
 
     @Inject
-    ItemClarityOverlay(ItemManager itemManager, ItemClarityConfig config) {
+    EmptyContainerDimmerOverlay(ItemManager itemManager, EmptyContainerDimmerConfig config) {
         this.itemManager = itemManager;
         this.config = config;
         showOnInventory();
@@ -31,9 +31,7 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
 
     @Override
     public void renderItemOverlay(Graphics2D graphics2D, int itemId, WidgetItem widgetItem) {
-        ItemKind kind = ClarityItems.getKind(itemId);
-
-        if (kind == null) {
+        if (!EmptyContainerItems.isEmptyContainer(itemId)) {
             return;
         }
 
@@ -41,48 +39,9 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
         Graphics2D gfx = (Graphics2D) graphics2D.create();
 
         try {
-            switch (kind) {
-                case EMPTY_CONTAINER:
-                    renderDim(gfx, itemId, screenRectangle);
-                    break;
-                case TIER_ONE:
-                    renderTier(gfx, screenRectangle, 1);
-                    break;
-                case TIER_TWO:
-                    renderTier(gfx, screenRectangle, 2);
-                    break;
-                case TIER_THREE:
-                    renderTier(gfx, screenRectangle, 3);
-                    break;
-            }
+            renderDim(gfx, itemId, screenRectangle);
         } finally {
             gfx.dispose();
-        }
-    }
-
-    private void renderTier(Graphics2D gfx, Rectangle bounds, int tier) {
-        if (!config.showTierMarkers()) {
-            return;
-        }
-
-        int diameter = 5;
-        int gap = 1;
-        int padding = 1;
-
-        int totalWidth = tier * diameter + (tier - 1) * gap;
-        int startX = (bounds.x + (bounds.width - totalWidth) / 2) - 1;
-        int y = bounds.y + bounds.height - padding - diameter;
-
-        gfx.setComposite(AlphaComposite.SrcOver);
-
-        for (int i = 0; i < tier; i++) {
-            int x = startX + i * (diameter + gap);
-
-            gfx.setColor(Color.BLACK);
-            gfx.fillRect(x, y, diameter, diameter);
-
-            gfx.setColor(Color.WHITE);
-            gfx.fillRect(x + 1, y + 1, diameter - 2, diameter - 2);
         }
     }
 
