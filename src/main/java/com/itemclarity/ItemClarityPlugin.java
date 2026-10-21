@@ -36,7 +36,7 @@ public class ItemClarityPlugin extends Plugin
 	{
 		log.debug("Item Clarity started!");
 
-        overlay.prepareImages(ItemID.JUG_EMPTY);
+        overlay.prepareImages(ItemID.JUG_EMPTY, ItemID.BUCKET_EMPTY);
         overlayManager.add(overlay);
 	}
 
