@@ -15,11 +15,14 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
 
     private final ItemManager itemManager;
 
+    private final ItemClarityConfig config;
+
     private BufferedImage dimMask;
 
     @Inject
-    ItemClarityOverlay(ItemManager itemManager) {
+    ItemClarityOverlay(ItemManager itemManager, ItemClarityConfig config) {
         this.itemManager = itemManager;
+        this.config = config;
         showOnInventory();
     }
 
@@ -35,7 +38,9 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
         Graphics2D gfx = (Graphics2D) graphics2D.create();
 
         try {
-            gfx.setComposite(AlphaComposite.SrcOver.derive(0.5f));
+            float dimStrength = config.dimStrength();
+
+            gfx.setComposite(AlphaComposite.SrcOver.derive(dimStrength / 100f));
             gfx.drawImage(
                     dimMask,
                     screenRectangle.x,
