@@ -11,6 +11,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.client.ui.overlay.OverlayManager;
 
 @Slf4j
 @PluginDescriptor(
@@ -26,25 +27,26 @@ public class ItemClarityPlugin extends Plugin
 	@Inject
 	private ItemClarityConfig config;
 
+    @Inject
+    private OverlayManager overlayManager;
+
+    @Inject
+    private ItemClarityOverlay overlay;
+
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.debug("Example started!");
+		log.debug("Item Clarity started!");
+
+        overlayManager.add(overlay);
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.debug("Example stopped!");
-	}
+		log.debug("Item Clarity stopped!");
 
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
-		}
+        overlayManager.remove(overlay);
 	}
 
 	@Provides
