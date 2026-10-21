@@ -6,8 +6,7 @@ import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.Range;
 
 @ConfigGroup("itemclarity")
-public interface ItemClarityConfig extends Config
-{
+public interface ItemClarityConfig extends Config {
     @Range(min = 0, max = 100)
     @ConfigItem(
             keyName = "dimStrength",
@@ -15,8 +14,7 @@ public interface ItemClarityConfig extends Config
             description = "0 leaves items unchanged, 100 makes them black",
             position = 0
     )
-    default int dimStrength()
-    {
+    default int dimStrength() {
         return 50;
     }
 }
