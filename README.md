@@ -4,12 +4,11 @@ A RuneLite accessibility plugin for making similar-looking items easier to disti
 
 ## Status
 
-Early development. The plugin currently loads into RuneLite and displays a template greeting message on login. No item-distinguishing features are implemented yet.
+Early development. The plugin currently dims empty jugs in the inventory to make them easier to distinguish from filled jugs.
 
 ## Planned Features
 
 - Configurable visual treatments applied to items in the inventory and other containers
-- Dimming empty containers (first planned feature)
 - Text labels and symbols to differentiate stacked or look-alike items
 
 ## Requirements
