@@ -10,11 +10,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import javax.inject.Inject;
 
 @Slf4j
-@PluginDescriptor(
-        name = "Empty Container Dimmer",
-        description = "Dims supported empty containers to make them easier to distinguish from filled ones.",
-        tags = {"accessibility", "inventory", "empty", "containers", "jugs", "buckets", "colorblind"}
-)
+@PluginDescriptor(name = "Empty Container Dimmer", description = "Dims supported empty containers to make them easier to distinguish from filled ones.", tags = {"accessibility", "inventory", "empty", "containers", "jugs", "buckets", "colorblind"})
 public class EmptyContainerDimmerPlugin extends Plugin {
     @Inject
     private OverlayManager overlayManager;
@@ -26,7 +22,7 @@ public class EmptyContainerDimmerPlugin extends Plugin {
     protected void startUp() throws Exception {
         log.debug("Empty Container Dimmer started!");
 
-        overlay.prepareImages(EmptyContainerItems.getEmptyContainerIds());
+        overlay.prepareImages();
         overlayManager.add(overlay);
     }
 

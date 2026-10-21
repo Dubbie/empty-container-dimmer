@@ -4,8 +4,15 @@ Dims supported empty containers to make them easier to distinguish from filled o
 
 ## Features
 
-- Dims empty containers, currently empty jugs and buckets.
-- Lets you enable dimming independently for jugs and buckets and adjust its strength.
+- Dims empty jugs, buckets, vials, bowls, pots, beer glasses, cups, plant pots, watering cans, fishbowls, baskets, and sacks.
+- Lets you enable dimming independently for each supported container type and adjust its strength.
+- Only the fixed empty item IDs are dimmed. Filled containers and partially filled watering cans are unchanged.
+
+### Supported containers
+
+Each of the 12 supported item types has its own enabled-by-default setting: empty jugs, buckets, ordinary vials, bowls, pots, beer glasses, cups, plant pots, fully depleted watering cans, fishbowls, baskets, and sacks. Dimming strength is shared across all types. The overlay prepares masks for every supported item when the plugin starts and reads each checkbox when rendering, so checkbox changes take effect immediately without restarting.
+
+Waterskins, Gricoller's can, teapots, kettles, other charged or dose-based containers, and multi-state storage containers need additional state handling to distinguish empty from partially filled variants. They are not included. Noted items are not included.
 
 ## Requirements
 
