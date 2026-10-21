@@ -31,7 +31,7 @@ public interface ItemClarityConfig extends Config {
     @ConfigItem(
             keyName = "showTierMarkers",
             name = "Show tier markers",
-            description = "Shows dots for composts",
+            description = "Shows small squares based on compost levels",
             position = 2
     )
     default boolean showTierMarkers() {

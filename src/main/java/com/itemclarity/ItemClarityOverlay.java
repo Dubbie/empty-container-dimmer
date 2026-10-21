@@ -65,12 +65,12 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
             return;
         }
 
-        int diameter = 6;
-        int gap = 2;
-        int padding = 2;
+        int diameter = 5;
+        int gap = 1;
+        int padding = 1;
 
         int totalWidth = tier * diameter + (tier - 1) * gap;
-        int startX = bounds.x + bounds.width - padding - totalWidth;
+        int startX = (bounds.x + (bounds.width - totalWidth) / 2) - 1;
         int y = bounds.y + bounds.height - padding - diameter;
 
         gfx.setComposite(AlphaComposite.SrcOver);
@@ -79,10 +79,10 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
             int x = startX + i * (diameter + gap);
 
             gfx.setColor(Color.BLACK);
-            gfx.fillOval(x, y, diameter, diameter);
+            gfx.fillRect(x, y, diameter, diameter);
 
             gfx.setColor(Color.WHITE);
-            gfx.fillOval(x + 1, y + 1, diameter - 2, diameter - 2);
+            gfx.fillRect(x + 1, y + 1, diameter - 2, diameter - 2);
         }
     }
 
