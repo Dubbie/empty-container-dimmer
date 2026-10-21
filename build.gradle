@@ -14,7 +14,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.example.ExamplePluginTest'
+def pluginMainClass = 'com.itemclarity.ItemClarityPluginTest'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -27,18 +27,22 @@ dependencies {
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'com.example'
+group = 'com.itemclarity'
 
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = 'UTF-8'
 	options.release.set(11)
+    options.compilerArgs.add('-Xlint:unchecked')
 }
 
 tasks.register('run', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = pluginMainClass
 
-	jvmArgs "-ea"
+	jvmArgs(
+            "-ea",
+            "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED"
+    )
 	args "--developer-mode", "--debug"
 }
 
@@ -66,4 +70,9 @@ tasks.register('shadowJar', Jar) {
 	group = BasePlugin.BUILD_GROUP
 	archiveClassifier.set('shadow')
 	archiveFileName.set("${rootProject.name}-${project.version}-all.jar")
+}
+
+tasks.named('test', Test) {
+    // This class launches the development client; it isn't a unit test.
+    exclude 'com/itemclarity/ItemClarityPluginTest.class'
 }
