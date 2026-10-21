@@ -7,14 +7,34 @@ import net.runelite.client.config.Range;
 
 @ConfigGroup("itemclarity")
 public interface ItemClarityConfig extends Config {
-    @Range(min = 0, max = 100)
+    @ConfigItem(
+            keyName = "dimEmptyContainers",
+            name = "Dim empty containers",
+            description = "Dims empty jugs and buckets",
+            position = 0
+    )
+    default boolean dimEmptyContainers() {
+        return true;
+    }
+
+    @Range(max = 100)
     @ConfigItem(
             keyName = "dimStrength",
             name = "Dimming Strength (%)",
             description = "0 leaves items unchanged, 100 makes them black",
-            position = 0
+            position = 1
     )
     default int dimStrength() {
         return 50;
+    }
+
+    @ConfigItem(
+            keyName = "showTierMarkers",
+            name = "Show tier markers",
+            description = "Shows dots for composts",
+            position = 2
+    )
+    default boolean showTierMarkers() {
+        return true;
     }
 }

@@ -61,6 +61,10 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
     }
 
     private void renderTier(Graphics2D gfx, Rectangle bounds, int tier) {
+        if (!config.showTierMarkers()) {
+            return;
+        }
+
         int diameter = 6;
         int gap = 2;
         int padding = 2;
@@ -83,6 +87,10 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
     }
 
     private void renderDim(Graphics2D gfx, int itemId, Rectangle bounds) {
+        if (!config.dimEmptyContainers()) {
+            return;
+        }
+
         BufferedImage dimMask = dimMasks.get(itemId);
 
         if (dimMask == null) {
