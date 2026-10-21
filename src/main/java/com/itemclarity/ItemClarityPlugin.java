@@ -3,6 +3,7 @@ package com.itemclarity;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
+import net.runelite.api.gameval.ItemID;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -35,7 +36,7 @@ public class ItemClarityPlugin extends Plugin
 	{
 		log.debug("Item Clarity started!");
 
-        overlay.prepareImages();
+        overlay.prepareImages(ItemID.JUG_EMPTY);
         overlayManager.add(overlay);
 	}
 

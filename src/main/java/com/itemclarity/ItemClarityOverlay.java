@@ -1,6 +1,5 @@
 package com.itemclarity;
 
-import net.runelite.api.gameval.ItemID;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.WidgetItemOverlay;
@@ -10,6 +9,8 @@ import net.runelite.client.util.ImageUtil;
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemClarityOverlay extends WidgetItemOverlay {
 
@@ -17,7 +18,7 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
 
     private final ItemClarityConfig config;
 
-    private BufferedImage dimMask;
+    private final Map<Integer, BufferedImage> dimMasks = new HashMap<>();
 
     @Inject
     ItemClarityOverlay(ItemManager itemManager, ItemClarityConfig config) {
@@ -28,8 +29,9 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
 
     @Override
     public void renderItemOverlay(Graphics2D graphics2D, int itemId, WidgetItem widgetItem) {
-        // we are only interested in empty jug atm
-        if (itemId != ItemID.JUG_EMPTY || dimMask == null) {
+        BufferedImage dimMask = dimMasks.get(itemId);
+
+        if (dimMask == null) {
             return;
         }
 
@@ -52,10 +54,10 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
         }
     }
 
-    void prepareImages() {
-        AsyncBufferedImage itemSprite = itemManager.getImage(ItemID.JUG_EMPTY);
-        itemSprite.onLoaded(() -> {
-            dimMask = ImageUtil.fillImage(itemSprite, Color.BLACK);
-        });
+    void prepareImages(int... itemIds) {
+        for (int itemId : itemIds) {
+            AsyncBufferedImage itemSprite = itemManager.getImage(itemId);
+            itemSprite.onLoaded(() -> dimMasks.put(itemId, ImageUtil.fillImage(itemSprite, Color.BLACK)));
+        }
     }
 }
