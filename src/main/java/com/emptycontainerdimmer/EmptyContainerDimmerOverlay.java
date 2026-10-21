@@ -31,7 +31,7 @@ public class EmptyContainerDimmerOverlay extends WidgetItemOverlay {
 
     @Override
     public void renderItemOverlay(Graphics2D graphics2D, int itemId, WidgetItem widgetItem) {
-        if (!EmptyContainerItems.isEmptyContainer(itemId)) {
+        if (!EmptyContainerItems.shouldDim(itemId, config)) {
             return;
         }
 
@@ -46,10 +46,6 @@ public class EmptyContainerDimmerOverlay extends WidgetItemOverlay {
     }
 
     private void renderDim(Graphics2D gfx, int itemId, Rectangle bounds) {
-        if (!config.dimEmptyContainers()) {
-            return;
-        }
-
         BufferedImage dimMask = dimMasks.get(itemId);
 
         if (dimMask == null) {

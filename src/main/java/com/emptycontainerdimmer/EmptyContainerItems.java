@@ -2,20 +2,26 @@ package com.emptycontainerdimmer;
 
 import net.runelite.api.gameval.ItemID;
 
-import java.util.Set;
+import java.util.Map;
+import java.util.function.Predicate;
 
 final class EmptyContainerItems {
-    private static final Set<Integer> EMPTY_CONTAINERS = Set.of(
-            ItemID.JUG_EMPTY,
-            ItemID.BUCKET_EMPTY
-    );
+    private static final Map<Integer, Predicate<EmptyContainerDimmerConfig>> ITEMS =
+            Map.ofEntries(
+                    Map.entry(ItemID.JUG_EMPTY,
+                            EmptyContainerDimmerConfig::dimEmptyJugs),
+                    Map.entry(ItemID.BUCKET_EMPTY,
+                            EmptyContainerDimmerConfig::dimEmptyBuckets)
+            );
 
-    static boolean isEmptyContainer(int itemId) {
-        return EMPTY_CONTAINERS.contains(itemId);
+    static boolean shouldDim(int itemId, EmptyContainerDimmerConfig config) {
+        Predicate<EmptyContainerDimmerConfig> enabled = ITEMS.get(itemId);
+        return enabled != null && enabled.test(config);
     }
 
-    static int[] getEmptyContainerIds() {
-        return EMPTY_CONTAINERS.stream()
+    static int[] getEmptyContainerIds()
+    {
+        return ITEMS.keySet().stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
     }

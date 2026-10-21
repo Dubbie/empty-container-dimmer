@@ -5,7 +5,7 @@ Dims supported empty containers to make them easier to distinguish from filled o
 ## Features
 
 - Dims empty containers, currently empty jugs and buckets.
-- Lets you turn dimming on or off and adjust its strength.
+- Lets you enable dimming independently for jugs and buckets and adjust its strength.
 
 ## Requirements
 
