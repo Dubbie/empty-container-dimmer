@@ -16,4 +16,12 @@ final class ClarityItems {
     static ItemKind getKind(int itemId) {
         return ITEMS.get(itemId);
     }
+
+    static int[] getEmptyContainerIds()
+    {
+        return ITEMS.entrySet().stream()
+                .filter(entry -> entry.getValue() == ItemKind.EMPTY_CONTAINER)
+                .mapToInt(Map.Entry::getKey)
+                .toArray();
+    }
 }
