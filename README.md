@@ -4,12 +4,15 @@ A RuneLite accessibility plugin for making similar-looking items easier to disti
 
 ## Status
 
-Early development. In the inventory, the plugin dims empty jugs and buckets using the configurable dimming strength. It also marks compost buckets with tier indicators: one marker for compost, two for supercompost, and three for ultracompost.
+The plugin currently improves item clarity in the inventory:
+
+- Dims empty jugs and buckets, with a setting to turn dimming on or off and adjust its strength.
+- Marks compost buckets with tier indicators: one marker for compost, two for supercompost, and three for ultracompost. Tier markers can be turned on or off.
 
 ## Planned Features
 
-- Configurable visual treatments applied to items in the inventory and other containers
-- Additional labels and symbols to differentiate stacked or look-alike items
+- Extend item treatments to other containers.
+- Add more labels or symbols for stacked and look-alike items.
 
 ## Requirements
 
@@ -35,4 +38,4 @@ This launches a full RuneLite client with the plugin loaded. Log in using the [J
 
 ## License
 
-BSD 2-Clause
+[BSD 2-Clause](LICENSE)

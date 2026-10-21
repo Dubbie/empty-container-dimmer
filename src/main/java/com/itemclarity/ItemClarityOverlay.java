@@ -97,7 +97,7 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
             return;
         }
 
-        float dimStrength = config.dimStrength();
+        int dimStrength = Math.max(0, Math.min(100, config.dimStrength()));
 
         gfx.setComposite(AlphaComposite.SrcOver.derive(dimStrength / 100f));
         gfx.drawImage(
@@ -111,6 +111,12 @@ public class ItemClarityOverlay extends WidgetItemOverlay {
     void prepareImages(int... itemIds) {
         for (int itemId : itemIds) {
             AsyncBufferedImage itemSprite = itemManager.getImage(itemId);
+
+            if (itemSprite == null) {
+                log.debug("Missing image, item ID: {}", itemId);
+                continue;
+            }
+
             itemSprite.onLoaded(() -> dimMasks.put(itemId, ImageUtil.fillImage(itemSprite, Color.BLACK)));
         }
     }
